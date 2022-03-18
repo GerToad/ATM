@@ -45,7 +45,7 @@ public class Portada extends JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnSig){ // Abre una nueva ventana(transaction window)
-			Message main = new Message();
+			Ingreso main = new Ingreso();
 			main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			main.setResizable(false);
 			main.setLocationRelativeTo(null);

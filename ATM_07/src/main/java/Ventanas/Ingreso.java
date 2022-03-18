@@ -13,7 +13,7 @@ import atm.d.*;
  *
  * @author toad
  */
-public class Message extends JFrame implements ActionListener{
+public class Ingreso extends JFrame implements ActionListener{
 
 	private Label lblWlk, lblUsr, lblPsw; // Some labels
 	private TextField tfUsr, tfPsw; // Declare a TextField component
@@ -22,7 +22,7 @@ public class Message extends JFrame implements ActionListener{
 	boolean usuarioAutenticado = false;
 	BaseDatosBanco baseDatosBanco = new BaseDatosBanco();
 
-	public Message(){ // Este constructor creara todos los componentes del esta ventana
+	public Ingreso(){ // Este constructor creara todos los componentes del esta ventana
 
 		// Label
 		lblWlk= new Label("Bienvenido"); // Instancia de la variable de tipo Label
@@ -90,6 +90,7 @@ public class Message extends JFrame implements ActionListener{
 			main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			main.setResizable(false);
 			main.setLocationRelativeTo(null);
+			setVisible(false);
 		}
 		else{
 			tfUsr.setText("Wrong");
@@ -100,9 +101,9 @@ public class Message extends JFrame implements ActionListener{
 	 * @param args the command line arguments
 	 */
 	public static void main(String args[]) {
-		Message app = new Message();  // Aqui en la funcion main se instancia el constructor lo que hace que se ejecute todo el codigo anterior
+		Ingreso app = new Ingreso();  // Aqui en la funcion main se instancia el constructor lo que hace que se ejecute todo el codigo anterior
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Hace posible su cierre
 		app.setResizable(false);  // Esta funcion en false impide que se cambie el tamaño de la ventana
-		//app.setLocationRelativeTo(null); // Esta funcion hace que la ventana aparesca en el centro de la pantalla
+		app.setLocationRelativeTo(null); // Esta funcion hace que la ventana aparesca en el centro de la pantalla
 	}
 }
