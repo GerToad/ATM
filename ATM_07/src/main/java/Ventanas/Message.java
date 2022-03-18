@@ -7,6 +7,7 @@ package Ventanas;
 import java.awt.*;        // Using AWT container and component classes
 import java.awt.event.*;  // Using AWT event classes and listener interfaces
 import javax.swing.*;
+import atm.d.*;
 
 /**
  *
@@ -17,8 +18,12 @@ public class Message extends JFrame implements ActionListener{
 	private Label lblWlk, lblUsr, lblPsw; // Some labels
 	private TextField tfUsr, tfPsw; // Declare a TextField component
 	private Button btnLgn;   // Declare a Button component
+	private JPasswordField password;
+	boolean usuarioAutenticado = false;
+	BaseDatosBanco baseDatosBanco = new BaseDatosBanco();
 
 	public Message(){ // Este constructor creara todos los componentes del esta ventana
+
 		// Label
 		lblWlk= new Label("Bienvenido"); // Instancia de la variable de tipo Label
 		lblWlk.setBounds(250,30,100,30); // Esta funcion establece las medidas
@@ -42,9 +47,10 @@ public class Message extends JFrame implements ActionListener{
 		lblPsw.setFont(new Font("Consolas", 1, 13));
 		add(lblPsw);
 
-		tfPsw = new TextField(10);
-		tfPsw.setBounds(200,150,200,30);
-		add(tfPsw);
+		password = new JPasswordField(10);
+		password.setBounds(200,150,200,30);
+		add(password);
+		password.addActionListener(this);
 
 		// Button
 		btnLgn = new Button("Entrar");
@@ -57,17 +63,38 @@ public class Message extends JFrame implements ActionListener{
 		setLayout(null);  // Existen templates para la posision de los componentes pero son algo complicadas de usar asi que no las uso pero se acomodan con setBounds()
 		setSize(600, 300);  // El tamaño inicial de la ventana (600 pixeles de ancho y 300 de alto)
 		setVisible(true);  // Se indica que sea visible
-		
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnLgn){ // Abre una nueva ventana(transaction window)
+			autenticarUsuario();
+
+		}
+	}
+
+	private void autenticarUsuario() 
+	{
+		int count =  Integer.parseInt(tfUsr.getText());
+		String pwd = new String(password.getPassword());
+		int nip = Integer.parseInt(pwd);
+
+		// establece usuarioAutenticado con el valor booleano devuelto por la base de datos
+		usuarioAutenticado = 
+			baseDatosBanco.autenticarUsuario( count, nip );
+
+		// verifica si la autenticaci�n tuvo �xito
+		if ( usuarioAutenticado )
+		{
 			Transactions main = new Transactions();
 			main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			main.setResizable(false);
 			main.setLocationRelativeTo(null);
 		}
-	}
+		else{
+			tfUsr.setText("Wrong");
+		}
+	} 
 
 	/**
 	 * @param args the command line arguments
@@ -76,6 +103,6 @@ public class Message extends JFrame implements ActionListener{
 		Message app = new Message();  // Aqui en la funcion main se instancia el constructor lo que hace que se ejecute todo el codigo anterior
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Hace posible su cierre
 		app.setResizable(false);  // Esta funcion en false impide que se cambie el tamaño de la ventana
-		app.setLocationRelativeTo(null); // Esta funcion hace que la ventana aparesca en el centro de la pantalla
+		//app.setLocationRelativeTo(null); // Esta funcion hace que la ventana aparesca en el centro de la pantalla
 	}
 }
