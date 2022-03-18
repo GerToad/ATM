@@ -9,6 +9,7 @@ import java.awt.event.*;  // Using AWT event classes and listener interfaces
 import javax.swing.*;
 import atm.d.*;
 
+
 /**
  *
  * @author toad
@@ -19,6 +20,7 @@ public class Ingreso extends JFrame implements ActionListener{
 	private TextField tfUsr, tfPsw; // Declare a TextField component
 	private Button btnLgn;   // Declare a Button component
 	private JPasswordField password;
+
 	boolean usuarioAutenticado = false;
 	BaseDatosBanco baseDatosBanco = new BaseDatosBanco();
 
@@ -93,7 +95,7 @@ public class Ingreso extends JFrame implements ActionListener{
 			setVisible(false);
 		}
 		else{
-			tfUsr.setText("Wrong");
+			tfUsr.setText("Esta mal tu cuenta");
 		}
 	} 
 

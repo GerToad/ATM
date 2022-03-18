@@ -14,42 +14,37 @@ import javax.swing.*;
  */
 public class Transactions extends JFrame implements ActionListener{
 
-	private Label lblWlk, lblUsr, lblPsw;
-	private TextField tfUsr, tfPsw; // Declare a TextField component
-	private Button btnLgn;   // Declare a Button component
+	private Label lblMessage;
+	private Button btnSaldo, btnRetirar, btnDeposito, btnCancelar;   // Declare a Button component
 
 	public Transactions(){
-		lblWlk= new Label("You're in");
-		lblWlk.setBounds(250,30,100,30);
-		lblWlk.setFont(new Font("Consolas", 1, 13));
-		add(lblWlk);
+		lblMessage= new Label("Selecciona tu transaction");
+		lblMessage.setBounds(250,30,200,30);
+		lblMessage.setFont(new Font("Consolas", 1, 13));
+		add(lblMessage);
 
-		// User
-		lblUsr= new Label("Usuario");
-		lblUsr.setBounds(100,100,75,30);
-		lblUsr.setFont(new Font("Consolas", 1, 13));
-		add(lblUsr);
+		// Botones
+		btnSaldo = new Button("Saldo");
+		btnSaldo.setBounds(50, 110, 100, 30);
+		add(btnSaldo);
+		btnSaldo.addActionListener(this);
 
-		tfUsr = new TextField(10);
-		tfUsr.setBounds(200,100,200,30);
-		add(tfUsr);
+		btnDeposito = new Button("Deposito");
+		btnDeposito.setBounds(250, 110, 100, 30);
+		add(btnDeposito);
+		btnDeposito.addActionListener(this);
 
-		// Password
-		lblPsw= new Label("Contraseña");
-		lblPsw.setBounds(100,150,75,30);
-		lblPsw.setFont(new Font("Consolas", 1, 13));
-		add(lblPsw);
+		btnRetirar = new Button("Retiro");
+		btnRetirar.setBounds(450, 110, 100, 30);
+		add(btnRetirar);
+		btnRetirar.addActionListener(this);
 
-		tfPsw = new TextField(10);
-		tfPsw.setBounds(200,150,200,30);
-		add(tfPsw);
+		btnCancelar = new Button("Cancelar");
+		btnCancelar.setBounds(250, 210, 100, 30);
+		add(btnCancelar);
+		btnCancelar.addActionListener(this);
 
-		btnLgn = new Button("Entrar");
-		btnLgn.setBounds(250, 210, 100, 30);
-		add(btnLgn);
-		btnLgn.addActionListener(this);
-
-		setTitle("Message");
+		setTitle("Menu");
 
 		setLayout(null);
 		setSize(600, 300);
@@ -57,7 +52,11 @@ public class Transactions extends JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btnLgn){
+		if(e.getSource() == btnCancelar){
+			System.exit(0);
+		}
+		if(e.getSource() == btnSaldo){
+			
 		}
 	}
 
