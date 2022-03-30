@@ -29,6 +29,11 @@ public class Saldo extends JFrame implements ActionListener{
 		add(btnCancelar);
 		btnCancelar.addActionListener(this);
 
+		setTitle("Saldo");
+
+		setLayout(null);
+		setSize(600, 300);
+		setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -37,10 +42,18 @@ public class Saldo extends JFrame implements ActionListener{
 		}
 	}
 
+	public double getSaldo(){
+		double saldoDisponible = 
+			baseDatosBanco.obtenerSaldoDisponible( obtenerNumeroCuenta() );
+	}
+
 	/**
 	 * @param args the command line arguments
 	 */
 	public static void main(String args[]) {
-		// TODO code application logic here
+		Saldo app = new Saldo();
+		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		app.setResizable(false);
+		app.setLocationRelativeTo(null);
 	}
 }
