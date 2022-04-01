@@ -75,11 +75,12 @@ public class Ingreso extends JFrame implements ActionListener{
 		}
 	}
 
-	private void autenticarUsuario() 
+	public boolean autenticarUsuario() 
 	{
 		int count =  Integer.parseInt(tfUsr.getText());
 		String pwd = new String(password.getPassword());
 		int nip = Integer.parseInt(pwd);
+		boolean pass = false;
 
 		// establece usuarioAutenticado con el valor booleano devuelto por la base de datos
 		usuarioAutenticado = 
@@ -88,15 +89,13 @@ public class Ingreso extends JFrame implements ActionListener{
 		// verifica si la autenticaci�n tuvo �xito
 		if ( usuarioAutenticado )
 		{
-			Transactions main = new Transactions();
-			main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			main.setResizable(false);
-			main.setLocationRelativeTo(null);
 			setVisible(false);
+			pass = true;
 		}
 		else{
 			tfUsr.setText("Esta mal tu cuenta");
 		}
+		return pass;
 	} 
 
 	/**
