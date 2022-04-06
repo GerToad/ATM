@@ -21,18 +21,22 @@ public class ATM {
 
 	public ATM(){
 		ingreso = new Ingreso();		
-		while(pass){
-			boolean pass = ingreso.autenticarUsuario();
+		ingreso.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ingreso.setResizable(false);
+		ingreso.setLocationRelativeTo(null);
+		while(true){
+			pass = ingreso.getPass();
+			System.out.println(pass);  // Sin este print no sirve
+			if(pass){
+				break;
+			}
 		}
-		//System.out.println("Here goes");
-		//boolean go = ingreso.autenticarUsuario();
-		//System.out.print(go);
-		if(go){
-			Transactions trnstn = new Transactions();
-			trnstn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			trnstn.setResizable(false);
-			trnstn.setLocationRelativeTo(null);
-		}
+
+		Transactions trnstn = new Transactions();
+		trnstn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		trnstn.setResizable(false);
+		trnstn.setLocationRelativeTo(null);
+		
 	}
 
 	public static void main(String args[]) {

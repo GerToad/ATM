@@ -17,6 +17,7 @@ public class Saldo extends JFrame implements ActionListener{
 
 	private Label lblMensaje, lblUsr; // Some labels
 	private Button btnCancelar;   // Declare a Button component
+	BaseDatosBanco baseDatosBanco = new BaseDatosBanco();
 
 	public Saldo(){
 		lblMensaje= new Label("Saldo actual"); // Instancia de la variable de tipo Label
@@ -42,9 +43,9 @@ public class Saldo extends JFrame implements ActionListener{
 		}
 	}
 
-	public double getSaldo(){
+	public void getSaldo(){
 		double saldoDisponible = 
-			baseDatosBanco.obtenerSaldoDisponible( obtenerNumeroCuenta() );
+			baseDatosBanco.obtenerSaldoDisponible( /*obtenerNumeroCuenta()*/12 );
 	}
 
 	/**

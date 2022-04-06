@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
- */
 package Ventanas;
 
 import java.awt.*;        // Using AWT container and component classes
@@ -9,14 +5,9 @@ import java.awt.event.*;  // Using AWT event classes and listener interfaces
 import javax.swing.*;
 import atm.d.*;
 
+public class Pantalla extends JFrame implements ActionListener{
 
-/**
- *
- * @author toad
- */
-public class Ingreso extends JFrame implements ActionListener{
-
-	private Label lblWlk, lblUsr, lblPsw; // Some labels
+	private Label lblWlk, lblUsr, lblPsw, lblmsg; // Some labels
 	private TextField tfUsr, tfPsw; // Declare a TextField component
 	private Button btnLgn;   // Declare a Button component
 	private JPasswordField password;
@@ -25,7 +16,10 @@ public class Ingreso extends JFrame implements ActionListener{
 	boolean pass = false;
 	BaseDatosBanco baseDatosBanco = new BaseDatosBanco();
 
-	public Ingreso(){ // Este constructor creara todos los componentes del esta ventana
+
+	public Pantalla(){}
+
+	public void Ingreso(){ // Este constructor creara todos los componentes del esta ventana
 
 		// Label
 		lblWlk= new Label("Bienvenido"); // Instancia de la variable de tipo Label
@@ -67,6 +61,9 @@ public class Ingreso extends JFrame implements ActionListener{
 		setSize(600, 300);  // El tamaño inicial de la ventana (600 pixeles de ancho y 300 de alto)
 		setVisible(true);  // Se indica que sea visible
 
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		setResizable(false);                            	
+		setLocationRelativeTo(null);
 	}
 
 	public boolean getPass(){
@@ -92,22 +89,21 @@ public class Ingreso extends JFrame implements ActionListener{
 		// verifica si la autenticaci�n tuvo �xito
 		if ( usuarioAutenticado )
 		{
-			setVisible(false);
+			System.exit(0);
 			pass = true;
 		}
 		else{
-			tfUsr.setText("Esta mal tu cuenta");
+			// Mensaje de error
+			lblmsg= new Label("Datos erroneos");
+			lblmsg.setBounds(240,60,100,30);
+			lblmsg.setFont(new Font("Consolas", 1, 13));
+			add(lblmsg);
 		}
 		return pass;
 	} 
 
-	/**
-	 * @param args the command line arguments
-	 */
 	public static void main(String args[]) {
-		Ingreso app = new Ingreso();  // Aqui en la funcion main se instancia el constructor lo que hace que se ejecute todo el codigo anterior
-		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Hace posible su cierre
-		app.setResizable(false);  // Esta funcion en false impide que se cambie el tamaño de la ventana
-		app.setLocationRelativeTo(null); // Esta funcion hace que la ventana aparesca en el centro de la pantalla
+		Pantalla app = new Pantalla();
+		app.Ingreso();
 	}
 }
