@@ -7,26 +7,54 @@ import atm.d.*;
 
 public class Pantalla extends JFrame implements ActionListener{
 
-	private Label lblWlk, lblUsr, lblPsw, lblmsg; // Some labels
-	private TextField tfUsr, tfPsw; // Declare a TextField component
-	private Button btnLgn;   // Declare a Button component
+	private Label lblWlk, lblUsr, lblPsw, lblmsg, lblBienvenida, lblmensaje, lblMessage; 
+	private TextField tfUsr, tfPsw;
+	private Button btnLgn, btnSig, btnSaldo, btnRetirar, btnDeposito, btnCancelar;
 	private JPasswordField password;
 
 	boolean usuarioAutenticado = false;
 	boolean pass = false;
+	private int cuenta;
+	private String choose;
 	BaseDatosBanco baseDatosBanco = new BaseDatosBanco();
 
 
-	public Pantalla(){}
+	//public Pantalla(){}
 
-	public void Ingreso(){ // Este constructor creara todos los componentes del esta ventana
+	public void Portada(){
+		// Label
+		lblBienvenida= new Label("Bienvenido");
+		lblBienvenida.setBounds(250,30,100,30);
+		lblBienvenida.setFont(new Font("Consolas", 1, 13));
+		add(lblBienvenida);
 
 		// Label
-		lblWlk= new Label("Bienvenido"); // Instancia de la variable de tipo Label
-		lblWlk.setBounds(250,30,100,30); // Esta funcion establece las medidas
-		lblWlk.setFont(new Font("Consolas", 1, 13));  // Fuente y tamaño del texto
-		add(lblWlk);  // Se tiene que añadir a la ventana actual con add()
+		lblmensaje= new Label("Este es tu cajero automatico");
+		lblmensaje.setBounds(200,130,200,30);
+		lblmensaje.setFont(new Font("Consolas", 1, 13));
+		add(lblmensaje);
 
+		// Button
+		btnSig = new Button("Entrar");
+		btnSig.setBounds(250, 210, 100, 30);
+		add(btnSig);
+		btnSig.addActionListener(this);
+
+		// General settings
+		setTitle("Portada");
+		setLayout(null);  
+		setSize(600, 300);
+		setVisible(true); 
+	}
+
+	public void Ingreso(){ 
+		pass = false; // false para misma variable
+
+		// Label
+		lblWlk= new Label("Bienvenido");
+		lblWlk.setBounds(250,30,100,30);
+		lblWlk.setFont(new Font("Consolas", 1, 13));
+		add(lblWlk);
 
 		// User
 		lblUsr= new Label("Usuario");
@@ -53,35 +81,96 @@ public class Pantalla extends JFrame implements ActionListener{
 		btnLgn = new Button("Entrar");
 		btnLgn.setBounds(250, 210, 100, 30);
 		add(btnLgn);
-		btnLgn.addActionListener(this); // Se le atribuye el evento que escucha las acciones, en este caso solo es el "click"
+		btnLgn.addActionListener(this);
 
 		// General settings
-		setTitle("Message");  // Establece el titulo de la ventana
-		setLayout(null);  // Existen templates para la posision de los componentes pero son algo complicadas de usar asi que no las uso pero se acomodan con setBounds()
-		setSize(600, 300);  // El tamaño inicial de la ventana (600 pixeles de ancho y 300 de alto)
-		setVisible(true);  // Se indica que sea visible
+		setTitle("Message");
+		setLayout(null);  
+		setSize(600, 300);
+		setVisible(true); 
+	}
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		setResizable(false);                            	
-		setLocationRelativeTo(null);
+	public void Transactions(){
+		lblMessage= new Label("Selecciona tu transaction");
+		lblMessage.setBounds(250,30,200,30);
+		lblMessage.setFont(new Font("Consolas", 1, 13));
+		add(lblMessage);
+
+		// Botones
+		btnSaldo = new Button("Saldo");
+		btnSaldo.setBounds(50, 110, 100, 30);
+		add(btnSaldo);
+		btnSaldo.addActionListener(this);
+
+		btnDeposito = new Button("Deposito");
+		btnDeposito.setBounds(250, 110, 100, 30);
+		add(btnDeposito);
+		btnDeposito.addActionListener(this);
+
+		btnRetirar = new Button("Retiro");
+		btnRetirar.setBounds(450, 110, 100, 30);
+		add(btnRetirar);
+		btnRetirar.addActionListener(this);
+
+		btnCancelar = new Button("Cancelar");
+		btnCancelar.setBounds(250, 210, 100, 30);
+		add(btnCancelar);
+		btnCancelar.addActionListener(this);
+
+		setTitle("Menu");
+
+		setLayout(null);
+		setSize(600, 300);
+		setVisible(true);
 	}
 
 	public boolean getPass(){
 		return pass;
 	}
 
+	public int getCount(){
+		return cuenta;
+	}
+
+	public String getChoose(){
+		return choose;
+	}
+
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btnLgn){ // Abre una nueva ventana(transaction window)
-			autenticarUsuario();
+		if(e.getSource() == btnSig){ 
+			pass = true;
+		}
+		if(e.getSource() == btnLgn){
+			int count =  Integer.parseInt(tfUsr.getText());
+			String pwd = new String(password.getPassword());
+			int nip = Integer.parseInt(pwd);
+
+			pass = autenticarUsuario(count, nip);
+			System.out.println("desde boton log "+pass);
+			if(pass == false){
+				// Mensaje de error
+				lblmsg= new Label("Datos erroneos");
+				lblmsg.setBounds(240,60,100,30);
+				lblmsg.setFont(new Font("Consolas", 1, 13));
+				add(lblmsg);
+			}
+		}
+		if(e.getSource() == btnCancelar){
+			choose = "cancelar";
+		}
+		if(e.getSource() == btnSaldo){
+			choose = "saldo";
+		}
+		if(e.getSource() == btnRetirar){
+			choose = "retiro";
+		}
+		if(e.getSource() == btnDeposito){
+			choose = "deposito";
 		}
 	}
 
-	public boolean autenticarUsuario() 
+	public boolean autenticarUsuario( int count, int nip ) 
 	{
-		int count =  Integer.parseInt(tfUsr.getText());
-		String pwd = new String(password.getPassword());
-		int nip = Integer.parseInt(pwd);
-
 		// establece usuarioAutenticado con el valor booleano devuelto por la base de datos
 		usuarioAutenticado = 
 			baseDatosBanco.autenticarUsuario( count, nip );
@@ -89,21 +178,14 @@ public class Pantalla extends JFrame implements ActionListener{
 		// verifica si la autenticaci�n tuvo �xito
 		if ( usuarioAutenticado )
 		{
-			System.exit(0);
-			pass = true;
+			cuenta = count;
 		}
-		else{
-			// Mensaje de error
-			lblmsg= new Label("Datos erroneos");
-			lblmsg.setBounds(240,60,100,30);
-			lblmsg.setFont(new Font("Consolas", 1, 13));
-			add(lblmsg);
-		}
-		return pass;
+
+		return usuarioAutenticado;
 	} 
 
-	public static void main(String args[]) {
-		Pantalla app = new Pantalla();
-		app.Ingreso();
-	}
+	//public static void main(String args[]) {
+		//Pantalla app = new Pantalla();
+		//app.Ingreso();
+	//}
 }

@@ -39,7 +39,7 @@ public class Transactions extends JFrame implements ActionListener{
 		add(btnRetirar);
 		btnRetirar.addActionListener(this);
 
-		btnCancelar = new Button("Cancelar");
+		btnCancelar = new Button("Salir");
 		btnCancelar.setBounds(250, 210, 100, 30);
 		add(btnCancelar);
 		btnCancelar.addActionListener(this);
