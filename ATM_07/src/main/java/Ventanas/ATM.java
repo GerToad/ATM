@@ -59,36 +59,29 @@ public class ATM {
 
 			choose = pantalla.getChoose();
 			System.out.println(choose);
-			/*Transactions temp;
+			Transactions temp;
+			//Transactions temp = null;
 			if(choose == "saldo"){
+				System.out.println(choose);
 				temp = new Saldo(cuenta);
-			}else if(choose == "retiro"){
-				temp = new Retiro(cuenta);
+				pantalla.setChoose("vaciar");
 			}else if(choose == "deposito"){
+				System.out.println(choose);
 				temp = new Deposito(cuenta);
+				pantalla.setChoose("vaciar");
+			}/*else if(choose == "retiro"){
+				System.out.println(choose);
+				pantalla.setChoose("vaciar");
+				temp = new Retiro(cuenta);
 			}else if(choose == "cancelar"){
 				break;
 			}*/
-			if(choose == "cancelar"){
-				break;
+			else if(choose == "cancelar"){
+				System.exit(0);
+				//break;
 			}
 		}
 	}
-
-	/*public boolean autenticarUsuario( int count, int nip ) 
-	{
-		// establece usuarioAutenticado con el valor booleano devuelto por la base de datos
-		usuarioAutenticado = 
-			baseDatosBanco.autenticarUsuario( count, nip );
-
-		// verifica si la autenticaci�n tuvo �xito
-		if ( usuarioAutenticado )
-		{
-			cuenta = count;
-		}
-
-		return usuarioAutenticado;
-	}*/ 
 
 	public static void main(String args[]) {
 		ATM app = new ATM();

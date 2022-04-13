@@ -7,14 +7,15 @@ import atm.d.*;
 
 public class Pantalla extends JFrame implements ActionListener{
 
-	private Label lblWlk, lblUsr, lblPsw, lblmsg, lblBienvenida, lblmensaje, lblMessage; 
-	private TextField tfUsr, tfPsw;
-	private Button btnLgn, btnSig, btnSaldo, btnRetirar, btnDeposito, btnCancelar;
+	private Label lblWlk, lblUsr, lblPsw, lblmsg, lblBienvenida, lblmensaje, lblMessage, lblMensaje; 
+	private TextField tfUsr, tfPsw, tfMonto;
+	private Button btnLgn, btnSig, btnSaldo, btnRetirar, btnDeposito, btnCancelar, btnSalir, btnMonto;
 	private JPasswordField password;
 
 	boolean usuarioAutenticado = false;
 	boolean pass = false;
 	private int cuenta;
+	private int monto;
 	private String choose;
 	BaseDatosBanco baseDatosBanco = new BaseDatosBanco();
 
@@ -124,6 +125,57 @@ public class Pantalla extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 
+	public void Saldo(double saldoDisponible, double saldoTotal){
+		lblMensaje= new Label("Saldo disponible: " + saldoDisponible); // Instancia de la variable de tipo Label
+		lblMensaje.setBounds(230,30,200,30); // Esta funcion establece las medidas
+		lblMensaje.setFont(new Font("Consolas", 1, 13));  // Fuente y tamaño del texto
+		add(lblMensaje);  // Se tiene que añadir a la ventana actual con add()
+
+		lblMessage= new Label("Saldo total: " + saldoTotal);
+		lblMessage.setBounds(230,100,200,30);
+		lblMessage.setFont(new Font("Consolas", 1, 13));
+		add(lblMessage);
+
+		btnSalir = new Button("Salir");
+		btnSalir.setBounds(250, 210, 100, 30);
+		add(btnSalir);
+		btnSalir.addActionListener(this);
+
+		setTitle("Saldo");
+
+		setLayout(null);
+		setSize(600, 300);
+		setVisible(true);
+	}
+
+	public void Deposito(){
+		lblMessage= new Label("Monto a depositar");
+		lblMessage.setBounds(250,30,120,30);
+		lblMessage.setFont(new Font("Consolas", 1, 13));
+		add(lblMessage);
+
+		tfMonto = new TextField();
+		tfMonto.setBounds(250,100,100,30);
+		tfMonto.setFont(new Font("Consolas", 1, 13));
+		add(tfMonto);
+
+		btnMonto = new Button("Depositar");
+		btnMonto.setBounds(200, 210, 100, 30);
+		add(btnMonto);
+		btnMonto.addActionListener(this);
+
+		btnSalir = new Button("Salir");
+		btnSalir.setBounds(310, 210, 100, 30);
+		add(btnSalir);
+		btnSalir.addActionListener(this);
+
+		setTitle("Deposito");
+
+		setLayout(null);
+		setSize(600, 300);
+		setVisible(true);
+	}
+
 	public boolean getPass(){
 		return pass;
 	}
@@ -134,6 +186,14 @@ public class Pantalla extends JFrame implements ActionListener{
 
 	public String getChoose(){
 		return choose;
+	}
+
+	public int getMonto(){
+		return monto;
+	}
+
+	public void setChoose(String empty){
+		choose = empty;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -155,6 +215,18 @@ public class Pantalla extends JFrame implements ActionListener{
 				add(lblmsg);
 			}
 		}
+		if(e.getSource() == btnMonto){
+			try{
+				monto =  Integer.parseInt(tfMonto.getText());
+				choose = "monto";
+			}catch(Exception ex){
+				// Mensaje de error
+				lblmsg= new Label("Solo numeros");
+				lblmsg.setBounds(240,60,100,30);
+				lblmsg.setFont(new Font("Consolas", 1, 13));
+				add(lblmsg);
+			}
+		}
 		if(e.getSource() == btnCancelar){
 			choose = "cancelar";
 		}
@@ -166,6 +238,9 @@ public class Pantalla extends JFrame implements ActionListener{
 		}
 		if(e.getSource() == btnDeposito){
 			choose = "deposito";
+		}
+		if(e.getSource() == btnSalir){
+			choose = "salir";
 		}
 	}
 
