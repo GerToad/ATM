@@ -6,8 +6,7 @@ import atm.d.*;
 
 public class Retiro extends Transactions{
 
-	private double saldoDisponible;
-	private double saldoTotal;
+	public Pantalla pantalla = new Pantalla();
 
 	public Retiro(int cuenta){
 		pantalla.Retiro();

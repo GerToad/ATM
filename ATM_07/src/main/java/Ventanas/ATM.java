@@ -41,7 +41,6 @@ public class ATM {
 					System.out.println("pass of ingreso: "+pass);
 					if(pass){
 						cuenta = pantalla.getCount();
-						//System.out.println(cuenta);
 						break;
 					}
 				}
@@ -49,30 +48,28 @@ public class ATM {
 			}
 		}
 
-		//pantalla.getContentPane().removeAll();
-		//pantalla.teclado();
-		//pantalla.Transactions();
-		//pantalla.getContentPane().revalidate();
-		//pantalla.getContentPane().repaint();
 		clean("transactions");
 		String choose = "";
+		double saldoDisponible = 0;
+		double saldoTotal = 0;
+		double[] saldos;
 		while(true){
-			//System.out.println(cuenta);
-
 			choose = pantalla.getChoose();
 			System.out.println(choose);
-			//Transactions temp;
-			//Transactions temp = null;
+			Transactions temp;
 			if(choose == "saldo"){
 				System.out.println(choose);
-				Saldo temp = new Saldo(cuenta);
-				double[] saldos = temp.ejecutar();
-				clean("saldo", saldos[0], saldos[1]);
-				//pantalla.Saldo(saldos[0], saldos[1]);
+				if(saldoDisponible == 0 && saldoTotal == 0){
+					temp = new Saldo();
+					saldos = temp.saldos(cuenta);
+					saldoDisponible = saldos[0];
+					saldoTotal = saldos[1];
+					//clean("saldo", saldos[0], saldos[1]);
+				}
+				clean("saldo", saldoDisponible, saldoTotal);
 				while(true){
 					System.out.println("Dentro de saldo y " + pantalla.getChoose());
 					if(pantalla.getChoose() == "salir"){
-						//pantalla.setVisible(false);
 						break;
 					}
 				}
@@ -80,11 +77,27 @@ public class ATM {
 				clean("transactions");
 			}else if(choose == "deposito"){
 				System.out.println(choose);
-				Deposito temp = new Deposito(cuenta);
+				temp = new Deposito();
+				clean("deposito");
+				while(true){
+					System.out.println("Dentro de deposito y " + pantalla.getChoose());
+					if(pantalla.getChoose() == "salir"){
+						break;
+					}
+					if(pantalla.getChoose() == "monto"){
+						temp.ejecutar(cuenta, pantalla.getMonto());
+						saldos = temp.saldos(cuenta);
+						saldoDisponible = saldos[0];
+						saldoTotal = saldos[1];
+						//pantalla.setChoose("vaciar");
+						break;
+					}
+				}
 				pantalla.setChoose("vaciar");
+				clean("transactions");
 			}else if(choose == "retirar"){
 				System.out.println(choose);
-				Retiro temp = new Retiro(cuenta);
+				temp = new Retiro(cuenta);
 				pantalla.setChoose("vaciar");
 			}else if(choose == "cancelar"){
 				System.exit(0);
