@@ -5,11 +5,12 @@ import java.awt.event.*;  // Using AWT event classes and listener interfaces
 import javax.swing.*;
 import atm.d.*;
 
-public class Pantalla extends JFrame implements ActionListener{
+//public class Pantalla extends JFrame implements ActionListener{
+public class Pantalla extends Teclado{
 
-	private Label lblWlk, lblUsr, lblPsw, lblmsg, lblBienvenida, lblmensaje, lblMessage, lblMensaje; 
+	public Label lblWlk, lblUsr, lblPsw, lblmsg, lblBienvenida, lblmensaje, lblMessage, lblMensaje; 
 	private TextField tfUsr, tfPsw, tfMonto;
-	private Button btnLgn, btnSig, btnSaldo, btnRetirar, btnDeposito, btnCancelar, btnSalir, btnMonto;
+	private Button btnLgn, btnSig, btnSaldo, btnRetirar, btnDeposito, btnCancelar, btnSalir, btnMonto, btnRetiro;
 	private JPasswordField password;
 
 	boolean usuarioAutenticado = false;
@@ -36,7 +37,7 @@ public class Pantalla extends JFrame implements ActionListener{
 		add(lblmensaje);
 
 		// Button
-		btnSig = new Button("Entrar");
+		btnSig = new Button("Continuar");
 		btnSig.setBounds(250, 210, 100, 30);
 		add(btnSig);
 		btnSig.addActionListener(this);
@@ -44,7 +45,7 @@ public class Pantalla extends JFrame implements ActionListener{
 		// General settings
 		setTitle("Portada");
 		setLayout(null);  
-		setSize(600, 300);
+		//setSize(600, 300);
 		setVisible(true); 
 	}
 
@@ -87,7 +88,7 @@ public class Pantalla extends JFrame implements ActionListener{
 		// General settings
 		setTitle("Message");
 		setLayout(null);  
-		setSize(600, 300);
+		//setSize(600, 300);
 		setVisible(true); 
 	}
 
@@ -121,7 +122,7 @@ public class Pantalla extends JFrame implements ActionListener{
 		setTitle("Menu");
 
 		setLayout(null);
-		setSize(600, 300);
+		//setSize(600, 300);
 		setVisible(true);
 	}
 
@@ -144,7 +145,7 @@ public class Pantalla extends JFrame implements ActionListener{
 		setTitle("Saldo");
 
 		setLayout(null);
-		setSize(600, 300);
+		//setSize(600, 300);
 		setVisible(true);
 	}
 
@@ -172,7 +173,35 @@ public class Pantalla extends JFrame implements ActionListener{
 		setTitle("Deposito");
 
 		setLayout(null);
-		setSize(600, 300);
+		//setSize(600, 300);
+		setVisible(true);
+	}
+
+	public void Retiro(){
+		lblMessage= new Label("¿Cuanto desea retirar?");
+		lblMessage.setBounds(240,30,150,30);
+		lblMessage.setFont(new Font("Consolas", 1, 13));
+		add(lblMessage);
+
+		tfMonto = new TextField();
+		tfMonto.setBounds(250,100,100,30);
+		tfMonto.setFont(new Font("Consolas", 1, 13));
+		add(tfMonto);
+
+		btnRetiro = new Button("Retirar");
+		btnRetiro.setBounds(200, 210, 100, 30);
+		add(btnRetiro);
+		btnRetiro.addActionListener(this);
+
+		btnSalir = new Button("Salir");
+		btnSalir.setBounds(310, 210, 100, 30);
+		add(btnSalir);
+		btnSalir.addActionListener(this);
+
+		setTitle("Retiro");
+
+		setLayout(null);
+		//setSize(600, 300);
 		setVisible(true);
 	}
 
@@ -221,12 +250,25 @@ public class Pantalla extends JFrame implements ActionListener{
 				choose = "monto";
 			}catch(Exception ex){
 				// Mensaje de error
-				lblmsg= new Label("Solo numeros");
-				lblmsg.setBounds(240,60,100,30);
+				lblmsg= new Label("Introdusca una cantidad valida");
+				lblmsg.setBounds(220,60,150,30);
 				lblmsg.setFont(new Font("Consolas", 1, 13));
 				add(lblmsg);
 			}
 		}
+		if(e.getSource() == btnRetiro){
+			try{
+				monto = Integer.parseInt(tfMonto.getText());
+				choose = "retiro";
+			}catch(Exception ex){
+				// Mensaje de error
+				lblmsg= new Label("Introdusca una cantidad valida");
+				lblmsg.setBounds(220,60,200,30);
+				lblmsg.setFont(new Font("Consolas", 1, 13));
+				add(lblmsg);
+			}
+		}
+
 		if(e.getSource() == btnCancelar){
 			choose = "cancelar";
 		}
@@ -234,7 +276,7 @@ public class Pantalla extends JFrame implements ActionListener{
 			choose = "saldo";
 		}
 		if(e.getSource() == btnRetirar){
-			choose = "retiro";
+			choose = "retirar";
 		}
 		if(e.getSource() == btnDeposito){
 			choose = "deposito";
