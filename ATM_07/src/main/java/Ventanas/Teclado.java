@@ -6,7 +6,8 @@ import javax.swing.*;
 
 public class Teclado extends JFrame implements ActionListener{
 
-	private Button uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, cero, ranura;
+	public Button uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, cero, borrar, ranura;
+	public String key = "";
 
 	public Teclado(){
 		teclado();
@@ -74,6 +75,12 @@ public class Teclado extends JFrame implements ActionListener{
 		add(cero);
 		cero.addActionListener(this);
 
+		// Borrar
+		borrar = new Button("<");
+		borrar.setBounds(325, 520, 30, 30);
+		add(borrar);
+		borrar.addActionListener(this);
+
 		// Ranura
 		ranura= new Button("Efectivo");
 		ranura.setBounds(150,580,300,30);
@@ -91,7 +98,21 @@ public class Teclado extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == uno){
 			System.out.println("Uno");
+			key += "1";
+			System.exit(0);
 		}
+		if(e.getSource() == dos){
+			System.out.println("Dos");
+			key += "2";
+		}
+	}
+
+	public String getKey(){
+		return key;
+	}
+
+	public void borrar(){
+		key = key.substring(0, key.length()-1);
 	}
 
 	/*public static void main(String[] args) {

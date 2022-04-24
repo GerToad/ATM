@@ -9,8 +9,8 @@ import atm.d.*;
 public class Pantalla extends Teclado{
 
 	public Label lblWlk, lblUsr, lblPsw, lblmsg, lblBienvenida, lblmensaje, lblMessage, lblMensaje; 
-	private TextField tfUsr, tfPsw, tfMonto;
-	private Button btnLgn, btnSig, btnSaldo, btnRetirar, btnDeposito, btnCancelar, btnSalir, btnMonto, btnRetiro;
+	public TextField tfUsr, tfPsw, tfMonto;
+	public Button btnLgn, btnSig, btnSaldo, btnRetirar, btnDeposito, btnCancelar, btnSalir, btnMonto, btnRetiro;
 	private JPasswordField password;
 
 	boolean usuarioAutenticado = false;
@@ -283,6 +283,42 @@ public class Pantalla extends Teclado{
 		}
 		if(e.getSource() == btnSalir){
 			choose = "salir";
+		}
+		if(e.getSource() == uno){
+			System.out.println("Uno");
+			key += "1";
+		}
+		if(e.getSource() == dos){
+			System.out.println("Dos");
+			key += "2";
+		}
+		if(e.getSource() == tres){
+			key += "3";
+		}
+		if(e.getSource() == cuatro){
+			key += "4";
+		}
+		if(e.getSource() == cinco){
+			key += "5";
+		}
+		if(e.getSource() == seis){
+			key += "6";
+		}
+		if(e.getSource() == siete){
+			key += "7";
+		}
+		if(e.getSource() == ocho){
+			key += "8";
+		}
+		if(e.getSource() == nueve){
+			key += "9";
+		}
+		if(e.getSource() == cero){
+			key += "0";
+		}
+		if(e.getSource() == borrar){
+			System.out.println("borrar");
+			borrar();
 		}
 	}
 

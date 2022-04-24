@@ -1,12 +1,10 @@
 package Ventanas;
 import javax.swing.*;
-import java.awt.*;        // Using AWT container and component classes
-import java.awt.event.*;  // Using AWT event classes and listener interfaces
 import atm.d.*;
 
 public class Retiro extends Transactions{
 
-	public Pantalla pantalla = new Pantalla();
+	/*public Pantalla pantalla = new Pantalla();
 
 	public Retiro(int cuenta){
 		pantalla.Retiro();
@@ -33,5 +31,10 @@ public class Retiro extends Transactions{
 				}
 			}
 		}
+	}*/
+
+	public void ejecutar(int cuenta, double monto){
+		System.out.println(cuenta + " " + monto);
+		baseDatosBanco.cargar(cuenta, monto);
 	}
 }

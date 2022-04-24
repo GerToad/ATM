@@ -79,8 +79,12 @@ public class ATM {
 				System.out.println(choose);
 				temp = new Deposito();
 				clean("deposito");
+				cleanKey();
 				while(true){
-					System.out.println("Dentro de deposito y " + pantalla.getChoose());
+					String key = pantalla.getKey();
+					pantalla.tfMonto.setText(key);
+					//System.exit(0);
+					//System.out.println("Dentro de deposito y " + pantalla.getChoose());
 					if(pantalla.getChoose() == "salir"){
 						break;
 					}
@@ -97,8 +101,27 @@ public class ATM {
 				clean("transactions");
 			}else if(choose == "retirar"){
 				System.out.println(choose);
-				temp = new Retiro(cuenta);
+				temp = new Retiro();
+				clean("retiro");
+				cleanKey();
+				while(true){
+					String key = pantalla.getKey();
+					pantalla.tfMonto.setText(key);
+					System.out.println("Dentro de retiro y " + pantalla.getChoose());
+					if(pantalla.getChoose() == "salir"){
+						break;
+					}
+					if(pantalla.getChoose() == "retiro"){
+						temp.ejecutar(cuenta, pantalla.getMonto());
+						saldos = temp.saldos(cuenta);
+						saldoDisponible = saldos[0];
+						saldoTotal = saldos[1];
+						//pantalla.setChoose("vaciar");
+						break;
+					}
+				}
 				pantalla.setChoose("vaciar");
+				clean("transactions");
 			}else if(choose == "cancelar"){
 				System.exit(0);
 				//break;
@@ -115,6 +138,7 @@ public class ATM {
 		pantalla.revalidate();
 		pantalla.repaint();
 	}
+
 	public void clean(String function){
 		pantalla.getContentPane().removeAll();
 		pantalla.teclado();
@@ -129,6 +153,10 @@ public class ATM {
 		}
 		pantalla.revalidate();
 		pantalla.repaint();
+	}
+
+	public void cleanKey(){
+		pantalla.key = "";
 	}
 
 	public static void main(String args[]) {
