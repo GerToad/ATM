@@ -10,8 +10,9 @@ public class Pantalla extends Teclado{
 
 	public Label lblWlk, lblUsr, lblPsw, lblmsg, lblBienvenida, lblmensaje, lblMessage, lblMensaje; 
 	public TextField tfUsr, tfPsw, tfMonto;
+	public JTextField user;
 	public Button btnLgn, btnSig, btnSaldo, btnRetirar, btnDeposito, btnCancelar, btnSalir, btnMonto, btnRetiro;
-	private JPasswordField password;
+	public JPasswordField password;
 
 	boolean usuarioAutenticado = false;
 	boolean pass = false;
@@ -64,9 +65,22 @@ public class Pantalla extends Teclado{
 		lblUsr.setFont(new Font("Consolas", 1, 13));
 		add(lblUsr);
 
-		tfUsr = new TextField(10);
-		tfUsr.setBounds(200,100,200,30);
-		add(tfUsr);
+		user = new JTextField();
+		user.setBounds(200,100,200,30);
+		user.addFocusListener(new FocusListener(){
+
+			@Override
+			public void focusGained(FocusEvent fe) {
+				choose = "user";
+				key = "";
+			}
+
+			@Override
+			public void focusLost(FocusEvent fe) {
+				choose = "user";
+			}
+		});
+		add(user);
 
 		// Password
 		lblPsw= new Label("Contraseña");
@@ -76,8 +90,20 @@ public class Pantalla extends Teclado{
 
 		password = new JPasswordField(10);
 		password.setBounds(200,150,200,30);
+		password.addFocusListener(new FocusListener(){
+
+			@Override
+			public void focusGained(FocusEvent fe) {
+				choose = "password";
+				key = "";
+			}
+
+			@Override
+			public void focusLost(FocusEvent fe) {
+				choose = "password";
+			}
+		});
 		add(password);
-		password.addActionListener(this);
 
 		// Button
 		btnLgn = new Button("Entrar");
@@ -114,7 +140,7 @@ public class Pantalla extends Teclado{
 		add(btnRetirar);
 		btnRetirar.addActionListener(this);
 
-		btnCancelar = new Button("Cancelar");
+		btnCancelar = new Button("Salir");
 		btnCancelar.setBounds(250, 210, 100, 30);
 		add(btnCancelar);
 		btnCancelar.addActionListener(this);
@@ -230,7 +256,7 @@ public class Pantalla extends Teclado{
 			pass = true;
 		}
 		if(e.getSource() == btnLgn){
-			int count =  Integer.parseInt(tfUsr.getText());
+			int count =  Integer.parseInt(user.getText());
 			String pwd = new String(password.getPassword());
 			int nip = Integer.parseInt(pwd);
 
@@ -285,11 +311,9 @@ public class Pantalla extends Teclado{
 			choose = "salir";
 		}
 		if(e.getSource() == uno){
-			System.out.println("Uno");
 			key += "1";
 		}
 		if(e.getSource() == dos){
-			System.out.println("Dos");
 			key += "2";
 		}
 		if(e.getSource() == tres){

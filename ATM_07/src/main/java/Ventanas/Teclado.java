@@ -6,7 +6,8 @@ import javax.swing.*;
 
 public class Teclado extends JFrame implements ActionListener{
 
-	public Button uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, cero, borrar, ranura;
+	public Button uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, cero, borrar;
+	public JTextField ranura;
 	public String key = "";
 
 	public Teclado(){
@@ -82,10 +83,21 @@ public class Teclado extends JFrame implements ActionListener{
 		borrar.addActionListener(this);
 
 		// Ranura
-		ranura= new Button("Efectivo");
+		ranura = new JTextField("Efectivo");
 		ranura.setBounds(150,580,300,30);
+		ranura.addFocusListener(new FocusListener(){
+
+			@Override
+			public void focusGained(FocusEvent fe) {
+				ranura.setText("Efectivo");
+			}
+
+			@Override
+			public void focusLost(FocusEvent fe) {
+				ranura.setText("Efectivo");
+			}
+		});
 		add(ranura);
-		ranura.addActionListener(this);
 
 		// General settings
 		setTitle("Teclado");
