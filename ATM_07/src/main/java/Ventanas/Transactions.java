@@ -1,6 +1,5 @@
 package Ventanas;
 import javax.swing.*;
-import atm.d.*;
 
 public class Transactions{
 
@@ -8,9 +7,6 @@ public class Transactions{
 	public double saldoDisponible;
 	public double saldoTotal;
 	public double[] saldos;
-
-	//public Transactions(int cuenta){
-	//}
 
 	public double[] saldos(int cuenta){
 		saldoDisponible = baseDatosBanco.obtenerSaldoDisponible( cuenta );

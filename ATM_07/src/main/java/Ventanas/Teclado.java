@@ -126,11 +126,4 @@ public class Teclado extends JFrame implements ActionListener{
 	public void borrar(){
 		key = key.substring(0, key.length()-1);
 	}
-
-	/*public static void main(String[] args) {
-		Teclado app = new Teclado();
-		app.setResizable(false);                            	
-		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		app.setLocationRelativeTo(null);
-	}*/
 }

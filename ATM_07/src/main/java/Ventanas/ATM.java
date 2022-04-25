@@ -1,15 +1,9 @@
-
 package Ventanas;
 
-import java.awt.*;        // Using AWT container and component classes
-import java.awt.event.*;  // Using AWT event classes and listener interfaces
+import java.awt.*;        
+import java.awt.event.*;  
 import javax.swing.*;
-import atm.d.*;
 
-/**
- *
- * @author toad
- */
 public class ATM {
 
 	public int token;
@@ -71,7 +65,6 @@ public class ATM {
 						saldos = temp.saldos(cuenta);
 						saldoDisponible = saldos[0];
 						saldoTotal = saldos[1];
-						//clean("saldo", saldos[0], saldos[1]);
 					}
 					clean("saldo", saldoDisponible, saldoTotal);
 					while(true){
@@ -98,7 +91,6 @@ public class ATM {
 							saldos = temp.saldos(cuenta);
 							saldoDisponible = saldos[0];
 							saldoTotal = saldos[1];
-							//pantalla.setChoose("vaciar");
 							break;
 						}
 					}

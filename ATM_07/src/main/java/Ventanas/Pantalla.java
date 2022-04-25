@@ -1,11 +1,9 @@
 package Ventanas;
 
-import java.awt.*;        // Using AWT container and component classes
-import java.awt.event.*;  // Using AWT event classes and listener interfaces
+import java.awt.*;        
+import java.awt.event.*;  
 import javax.swing.*;
-import atm.d.*;
 
-//public class Pantalla extends JFrame implements ActionListener{
 public class Pantalla extends Teclado{
 
 	public Label lblWlk, lblUsr, lblPsw, lblmsg, lblBienvenida, lblmensaje, lblMessage, lblMensaje; 
@@ -21,8 +19,6 @@ public class Pantalla extends Teclado{
 	private String choose;
 	BaseDatosBanco baseDatosBanco = new BaseDatosBanco();
 
-
-	//public Pantalla(){}
 
 	public void Portada(){
 		// Label
@@ -46,7 +42,6 @@ public class Pantalla extends Teclado{
 		// General settings
 		setTitle("Portada");
 		setLayout(null);  
-		//setSize(600, 300);
 		setVisible(true); 
 	}
 
@@ -114,7 +109,6 @@ public class Pantalla extends Teclado{
 		// General settings
 		setTitle("Message");
 		setLayout(null);  
-		//setSize(600, 300);
 		setVisible(true); 
 	}
 
@@ -148,7 +142,6 @@ public class Pantalla extends Teclado{
 		setTitle("Menu");
 
 		setLayout(null);
-		//setSize(600, 300);
 		setVisible(true);
 	}
 
@@ -169,9 +162,7 @@ public class Pantalla extends Teclado{
 		btnSalir.addActionListener(this);
 
 		setTitle("Saldo");
-
 		setLayout(null);
-		//setSize(600, 300);
 		setVisible(true);
 	}
 
@@ -197,9 +188,7 @@ public class Pantalla extends Teclado{
 		btnSalir.addActionListener(this);
 
 		setTitle("Deposito");
-
 		setLayout(null);
-		//setSize(600, 300);
 		setVisible(true);
 	}
 
@@ -225,9 +214,7 @@ public class Pantalla extends Teclado{
 		btnSalir.addActionListener(this);
 
 		setTitle("Retiro");
-
 		setLayout(null);
-		//setSize(600, 300);
 		setVisible(true);
 	}
 
@@ -250,6 +237,19 @@ public class Pantalla extends Teclado{
 	public void setChoose(String empty){
 		choose = empty;
 	}
+
+	public boolean autenticarUsuario( int count, int nip ) 
+	{
+		usuarioAutenticado = 
+			baseDatosBanco.autenticarUsuario( count, nip );
+
+		if ( usuarioAutenticado )
+		{
+			cuenta = count;
+		}
+
+		return usuarioAutenticado;
+	} 
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnSig){ 
@@ -346,23 +346,4 @@ public class Pantalla extends Teclado{
 		}
 	}
 
-	public boolean autenticarUsuario( int count, int nip ) 
-	{
-		// establece usuarioAutenticado con el valor booleano devuelto por la base de datos
-		usuarioAutenticado = 
-			baseDatosBanco.autenticarUsuario( count, nip );
-
-		// verifica si la autenticaci�n tuvo �xito
-		if ( usuarioAutenticado )
-		{
-			cuenta = count;
-		}
-
-		return usuarioAutenticado;
-	} 
-
-	//public static void main(String args[]) {
-		//Pantalla app = new Pantalla();
-		//app.Ingreso();
-	//}
 }

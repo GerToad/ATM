@@ -1,6 +1,5 @@
 package Ventanas;
 import javax.swing.*;
-import atm.d.*;
 
 public class Deposito extends Transactions{
 
